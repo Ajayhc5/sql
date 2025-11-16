@@ -1,0 +1,18 @@
+lst = [1, 2, 3, 4, 5]
+
+for i in lst:
+    print(i)
+
+create table emp (cl1  int, cl2 varchar, cl3 int)
+
+inster into emp values('1', 'ajay', '89706544'), ('2', 'ajay', '89706544')
+
+
+select cl1, cl2, count(*) from tbl group by cl1, cl2 having count(*)>1;
+
+emp, dept
+
+
+select e,cl1, e,cl2, m,cl2, m.cl4 from emp e 
+inner join 
+dept m on e.cl5=m.cl5

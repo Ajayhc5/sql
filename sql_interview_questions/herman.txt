@@ -1,0 +1,39 @@
+Table: customer_transactions
++---+-------------+-------------------+------------------+
+|id |customer_name|transaction_time   |transaction_amount|
++---+-------------+-------------------+------------------+
+|1  |A            |2022-02-21 15:21:10|533               |
+|2  |B            |2022-02-21 15:21:20|234               |
+|3  |D            |2022-02-21 15:21:25|789               |
+|4  |D            |2022-02-21 15:21:45|34                |
+|5  |F            |2022-02-21 15:21:40|12                |
+|6  |A            |2022-02-21 15:22:05|445               |
+|7  |B            |2022-02-21 15:22:15|236               |
+|8  |C            |2022-02-21 15:22:30|643               |
+|9  |F            |2022-02-21 15:22:40|563               |
+|10 |C            |2022-02-21 15:22:60|876               |
++---+-------------+-------------------+------------------+
+
+
+Write a query to retrieve all the customer_name(s) (ordered) whose transactions have a -10 second gap from each other.
+
+
+
+SELECT DISTINCT customer_name
+FROM ( SELECT customer_name, transaction_time, LAG(transaction_time) OVER (PARTITION BY customer_name ORDER BY transaction_time) AS prev_time
+    FROM customer_transactions ) t
+WHERE DATEDIFF(SECOND, prev_time, transaction_time) = 10 ORDER BY customer_name;
+
+
+
+Query to Find the Employee with the 4th Highest Salary in Each Department From Employee Table
+
+select ename, sal, deptno from (select e.*, dense_rank() over(partition by e.deptno order by e.sal desc) rn from emp e)er where rn=4
+
+
+
+df= spak.read.format("csv").option(header, 'true').option(infraschema, 'true').load("path")
+
+spak.createortemptable("")
+spak_sql()
+

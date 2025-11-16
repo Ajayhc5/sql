@@ -1,0 +1,287 @@
+1)   1ST , MIDDEL, LAST, DOMINE, SERVICE  NAME OF EMAIL?
+
+SQL> SELECT * FROM CAP;
+
+        ID NAME       EMAIL                                           MOB        SAL GENDER
+---------- ---------- ---------------------------------------- ---------- ---------- ------
+         1 SONALIKA   SONALIKA.BM.5@GMAIL.COM                   102030405       5000 F
+         2 CHIRAG     CHIRAG.BM.52@GMAIL.COM                    102030401       5000 M
+         3 SHREYA     SHREYA.BM.52@GMAIL.COM                    102030402       5000 F
+         4 CHETHAN    CHETHAN.NS.5@GMAIL.COM                    102030403       5000 M
+         5 NISCHITHA  NISCHITHA.TR.4@GMAIL.COM                  102030404       5000 F
+         6 SHARU      SHARU.TJ.4@GMAIL.COM                      102030406       5000 F
+
+
+ANS:-SQL> SELECT SUBSTR(EMAIL,1,INSTR(EMAIL,'.',1,1)-1) AS FST_NM, 
+          SUBSTR(EMAIL,INSTR(EMAIL,'.',1,1)+1,INSTR(EMAIL,'.',1,2)-INSTR(EMAIL,'.',1,1)-1) AS SCD_NM, 
+          SUBSTR(EMAIL,INSTR(EMAIL,'.',1,2)+1, INSTR(EMAIL,'@',1,1)-INSTR(EMAIL,'.',1,2)-1) AS LST_NM
+          SUBSTR(EMAIL,INSTR(EMAIL,'@',1,1)+1, INSTR(EMAIL,'.',1,3)-INSTR(EMAIL,'@',1,1)-1) DMN_NM
+          SUBSTR(EMAIL,INSTR(EMAIL,'.',1,3)+1) SVR_NM
+          FROM CAP;
+
+
+SQL> SELECT SUBSTR(EMAIL,1,INSTR(EMAIL,'.',1,1)-1) AS FST_NM,
+  2  SUBSTR(EMAIL,INSTR(EMAIL,'.',1,1)+1,INSTR(EMAIL,'.',1,2)-INSTR(EMAIL,'.',1,1)-1) AS SCD_NM,
+  3  SUBSTR(EMAIL,INSTR(EMAIL,'.',1,2)+1, INSTR(EMAIL,'@',1,1)-INSTR(EMAIL,'.',1,2)-1) AS LST_NM,
+  4  SUBSTR(EMAIL,INSTR(EMAIL,'@',1,1)+1, INSTR(EMAIL,'.',1,3)-INSTR(EMAIL,'@',1,1)-1) DMN_NM,
+  5  SUBSTR(EMAIL,INSTR(EMAIL,'.',1,3)+1) SVR_NM FROM CAP;
+
+
+
+	FST_NM   	SCD_NM  	LST_NM  	DMN_NM  	SVR_NM
+	-------         ------          ------          ------          --------
+	SONALIKA        BM              5               GMAIL           COM
+	CHIRAG          BM              52              GMAIL           COM
+	SHREYA          BM              52              GMAIL           COM
+	CHETHAN         NS              5               GMAIL           COM
+	NISCHITHA       TR              4               GMAIL           COM
+	SHARU           TJ              4               GMAIL           COM
+
+	6 rows selected.
+
+
+
+2) Names & Numbers in a column, display saperetly name & column in different column?
+
+SQL> SELECT * FROM BAN;
+
+NAME
+----------
+1
+AJAY
+2
+DEEPU
+3
+SANJU
+4
+MURTHY
+
+8 rows selected.
+
+
+
+Ans:-
+SQL> SELECT TRANSLATE(NAME, '1234567890', '          ') AS NAME, TRANSLATE(NAME,'ABCDEFGHIJKLMNOPQRS
+TUVWXYZ', '                          ') ID FROM BAN;
+
+NAME       ID
+---------- ----------
+           1
+AJAY
+           2
+DEEPU
+           3
+SANJU
+           4
+MURTHY
+
+8 rows selected.
+
+
+
+3) Display first day and first month in current year?
+
+ANS:-
+SQL> SELECT TRUNC(SYSDATE,'YEAR') FST_DAY_YEAR FROM DUAL;
+
+FST_DAY_Y
+---------
+01-JAN-21
+
+
+4) Display last day and last month in current year?
+
+ANS:-
+SQL> SELECT ADD_MONTHS(TRUNC(SYSDATE,'YEAR'),12)-1 FROM DUAL;
+
+ADD_MONTH
+---------
+31-DEC-21
+
+
+5) Display first day of previous year?
+
+ANS:-
+SQL> SELECT ADD_MONTHS(TRUNC(SYSDATE,'YEAR'),-12) FROM DUAL;
+
+ADD_MONTH
+---------
+01-JAN-20
+
+6) Display last day of previous year?
+
+ANS:-
+SQL> SELECT ADD_MONTHS(TRUNC(SYSDATE,'YEAR'),-1)+30 FROM DUAL;
+
+ADD_MONTH
+---------
+31-DEC-20
+
+7) Display First day in current month?
+ANS:-
+SQL> SELECT TRUNC(SYSDATE,'MONTH') FST_MNT FROM DUAL;
+
+FST_MNT
+---------
+01-APR-21
+
+8) Display Last day in current month?
+ANS:-
+SQL> SELECT LAST_DAY(SYSDATE) LST_DY_MN FROM DUAL;
+
+LST_DY_MN
+---------
+30-APR-21
+
+9) Display even records from emp table?
+ANS:-
+SQL> SELECT * FROM EMP WHERE (ROWID,0) IN (SELECT ROWID, MOD(ROWNUM,2) FROM EMP);
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10
+
+10) Display Odd records from emp table?
+ANS:-
+SQL> SELECT * FROM EMP WHERE (ROWID,1) IN (SELECT ROWID, MOD(ROWNUM,2) FROM EMP);
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20
+
+
+11) Display negative and positive numbers from emp;
+ANS:-
+> SELECT SUM(CASE WHEN SAL<0 THEN SAL END) NEGATIVE,
+SUM(CASE WHEN SAL>0 THEN SAL END) POSITIVE FROM EMP;
+
+  NEGATIVE   POSITIVE
+---------- ----------
+                29025
+
+
+
+
+12) display - epno, ename, salary, dname, avrage salary by deptno?
+
+>>select e.empno, e.ename, avg(e.sal) over(partition by e.deptno) as sal, d.dname from emp e, dep 
+
+
+13) delete duplicate records from table without using minus, rowid and rownum
+
+>> delete from dup_records where (first_name, last_name, email, age) in (select first_name, last_n
+ame, email, age from dup_records group by first_name, last_name, email, age having count(*)>1);
+
+
+14) How to insert the muliple records in oracle & sql server?
+
+>> insert all
+   into tb_nm (c1, c2, c3, c4) values (v1, v2, v3, v4)
+   into tb_nm (c1, c2, c3, c4) values (v1, v2, v3, v4)
+   into tb_nm (c1, c2, c3, c4) values (v1, v2, v3, v4)
+   into tb_nm (c1, c2, c3, c4) values (v1, v2, v3, v4)
+select * from dual;
+
+
+15) Display the string 'Apple' in vertical?
+
+>>select substr('Apple',level,1) str from dual connect by level<=length('Apple');
+S
+-
+A
+p
+p
+l
+e
+
+>> SELECT SUBSTR ('Apple', ROWNUM, 1) Vertical FROM DBA_OBJECTS WHERE ROWNUM <= LENGTH (TRIM ('Apple'));
+
+V
+-
+A
+p
+p
+l
+e
+
+table a 
+id
+1
+2
+3
+null
+
+table b
+id
+1
+2
+3
+
+16) inner join - 
+>> select * from a e inner join b f on e.id=f.id;
+id   id1
+1     1
+2     2
+3     3
+>> 3 records return
+
+17) Left out join - 
+>> select * from a e left outer join b f on e.id=f.id;
+id   id1
+1     1
+2     2
+3     3
+null  null
+>> 4 records return 
+
+18) Right out join - 
+>> select * from a e right outer join b f on e.id=f.id;
+id   id1
+1     1
+2     2
+3     3
+>> 3 records return 
+
+19) Full out join - 
+>> select * from a e full outer join b f on e.id=f.id;
+id   id1
+1     1
+2     2
+3     3
+null  null
+>> 4 records return 
+select * from a e inner join b f on e.id=f.id;
+
+select * from a e inner join b f on e.id<>f.id;
+
+select * from a e left outer join b f on e.id=f.id;
+
+select * from a e right outer join b f on e.id=f.id;
+select * from a e full outer join b f on e.id=f.id;
+select * from a e cross join b f;
+
+20) display ename, sal, deptno , sum of sal by detpno where sal> 65000 for the 81
+
+>> select * from emp where sal >= 2000 and to_char(hiredate, 'yy') = 81;
+>> select ename, sal, deptno, sum(sal) over(partition by deptno) sal_sum, hiredate from emp where sal >= 2000 and to_char(hiredate, 'yy') = 81;
+
+21) diaplay id, name, total marks of each student and sub2, sub3 have null values in student table?
+attributes are id, name, sub1, sub2, sub3, state
+
+>>select id, name, sub1+nvl(sub2,0),nvl(sub3,0) total_marks from student
+
+22) display the number of student from each state?
+
+>> select state, count(id) from student group by state;

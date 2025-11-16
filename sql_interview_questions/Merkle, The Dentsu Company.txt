@@ -1,0 +1,17 @@
+select cl1, cl2, cl3, count(*) as dpl_cnt from table group by cl1, cl2, cl3 having count()>1;
+
+
+select * from employee where format(cast(start_dt as date), 'yyyy') >= '2015' and format(cast(start_dt as date), 'yyyy')<='2019' and 
+month(cast(start_dt as date)) ='1' or month(cast(start_dt as date)) ='4';
+
+
+select e.Ename, e.Salary from employee e cross join employ m where e.sal=m.sal;
+
+
+select e.mid, e.Ename from employee e inner join employee m on e.fid = e.mid
+
+
+select mgr, dept, emp, salary from 
+(select emp, salary, dept , dense_rank() over(partition by dept, mgr order by salary desc) rn from salary) as ep
+inner join 
+(select e.mgr, e.dept from salary e group by e.mgr, e.dept) er on ep.dept=er.dept where rn =1;

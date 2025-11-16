@@ -1,0 +1,111 @@
+ajay.gouda@gmail.com
+akshay@yahoo.com
+
+
+select substring(email, 1, charindex('@', email)-1) as name from tbl
+
+select substring(email, charindex('@', email)+1, chraindex('.', email, charindex('@', email))-charindex('@', email)-1) as dm from tbl;
+
+
+table
+amount
+10$
+100$
+1000$
+
+select sum(amt) as total_amount from 
+(select cast(replace(cast(amount as varchar),'$', '' ) as int) as amt from tbl) er
+
+mp
+mgrname, empnname, sal
+employee earningmore than their managers...
+
+select  e.empnname, e.sal,  m.empnname as mgr_name, m.sal as m_sal 
+from emp e inner join emp m on e.mrg=m.empno and e.sal>m.sal;
+
+
+TABLE
+COL:country
+INDIA
+ENGLAND
+SOUTH AFRICA
+AUSTRELIA
+NZ
+
+COMBINATION OF MATCHES WITH EACH OTHER
+
+select c.country, d.country from tbl c cross join tbl d on c.country < d.country
+
+
+
+DEB/CREDIT
+50
+60
+-50
+-80
+-100
+SUM OF DEBIT AND SUM OF CREDIT
+
+
+select sum(case when [DEB/CREDIT]>0 then [DEB/CREDIT] else 0 end) positive_value, 
+sum(case when [DEB/CREDIT]<0 then [DEB/CREDIT] else 0 end) nagetive_value from tbl;
+
+COL
+12,23,34,4
+1,2,3
+34,45,56,667
+
+SELECT COL, LEN(COL) - LEN(REPLACE(COL, ',', '')) + 1 AS ValueCount
+FROM YourTable;
+
+
+NAME	MARKS
+AJAY	P
+AMAR	F
+ARUNA	P
+NIDHI	P
+AISHU	F
+
+
+RESULT	NUMBER
+PASS	3
+FAIL	2
+
+select result, count(*) NUMBER from
+(select case when marks='P' then 'PASS' else 'FAIL' end result, name from tbl)er group by result;
+
+
+
+sl sub	result
+1  a	p	
+1  b	f
+2  a	p
+2  b	p
+3  a	p
+3  b    f
+
+sl  resullt
+1   f
+2   p
+3   f
+
+
+SELECT sl, CASE WHEN SUM(CASE WHEN result = 'f' THEN 1 ELSE 0 END) > 0 THEN 'f' ELSE 'p' END AS result FROM YourTable GROUP BY sl;
+
+
+Bengalore, how many letters are repeated..
+
+SELECT COL,LEN(COL) - LEN(REPLACE(COL, ',', '')) + 1 AS ValueCount
+FROM YourTable;
+
+
+a = 'Bengalore'
+
+dst = {}
+
+for i in a:
+  if i in dst:
+       dst[i]=a[i]+1
+
+
+print(dst)

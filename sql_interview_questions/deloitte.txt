@@ -1,0 +1,21 @@
+emp
+empid, ename, location, indicator
+1      ajay    bng         y
+2      prasadh hyd        n
+3      ajay    chn        n
+4      prasadh bng        y
+
+
+emp_target
+ename   current_loc    prev_loc
+ajay    bng             chn
+parasadh bng            hyd
+
+
+
+select ename, case when indicator='y' then location end as current_loc, case when indicator='n' then location end as prev_loc from emp
+
+
+select e_name, formate(getdate(), 'yyyy') - format(dob, 'yyyy') as age from emp
+
+select  format(getdate(), 'yyyy')- cast(format(cast('1993-10-27' as date), 'yyyy') as int)  as age ;

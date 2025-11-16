@@ -1,0 +1,17 @@
+1. typr srting 8
+pass,
+
+2. select ename, birthdate from emp where dateadd(year, 60, birthdate) = '31-12-2022';
+
+3. drop table (table_name);
+
+4. select * from (select e.*, dense_rank() over(order by sal) rn from emp e) where rn =2;
+
+select * from emp where sal <(select max(sal) from emp where sal <(select max(sal) from emp));
+
+
+5. select card, netbanking from emp where to_cahr(transaction, 'dd-mm-yy HH:MM') > 'dd-mm-yy HH:MM' and to_cahr(transaction, 'dd-mm-yy HH:MM') < 'dd-mm-yy HH:MM';
+
+
+
+

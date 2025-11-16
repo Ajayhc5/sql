@@ -1,0 +1,15 @@
+
+Input Table: Products
+user_id    Product    Amount   transaction_date		CompanyMailID
+222        watch1    	24.99     02-10-2022 12:00	gadgets@hotmail.com
+222        watch1    	24.99     02-10-2022 12:00	gadgets@hotmail.com
+
+
+
+
+delete from products where (user_id,Product,Amount,transaction_date,CompanyMailIDProduct,Amount,transaction_date,CompanyMailID) in(select Product,Amount,transaction_date,CompanyMailID from products group by user_id,Product,Amount,transaction_date,CompanyMailID having count(*)>1);
+
+delete from products where transaction_date  in(select transaction_date from products group by transaction_date having(*)>1);
+
+
+

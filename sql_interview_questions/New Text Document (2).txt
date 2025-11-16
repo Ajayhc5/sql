@@ -1,0 +1,19 @@
+3data 
+
+students 
+marks
+college 
+
+students
+stid  stname 
+
+marks
+stid subject marks per
+
+
+college
+stid clgname 
+
+
+select e.stname, m.sub , c.clgname from student e, marks m, college c where e.stid=m.stid and e.stid=c.stid and marks/600*100>75;
+

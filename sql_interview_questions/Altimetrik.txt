@@ -1,0 +1,82 @@
+ 
+OriginalID
+100
+2020
+3010
+ 
+
+select cast(replace(cast(OriginalID as varchar), '0', '') as int) as OriginalID from tbl
+
+name
+maHesh
+suresh
+vasu
+praSanth
+
+name
+Mahesh
+Suresh
+Vasu
+Prasanth
+
+select upper(substring(name, 1, 1))+lower(substring(name, 2, len(name))) as name from tbl
+
+
+Emp_ID	Seminar1_Date	Seminar2_Date	Seminar3_Date
+1	01-10-2022	01-11-2022	 
+2	
+	02-11-2022	 
+3	03-11-2022	
+	 
+4	 	        05-11-2022	  06-11-2022
+5	07-12-2022
+
+
+Emp_ID	First_Seminar_date
+1	01-10-2022
+2	02-11-2022
+3	03-11-2022
+4	05-11-2022
+5	07-12-2022
+
+
+select Emp_ID, coalese(1st_dt, 1st_dt_2, 1st_dt_3 ) as First_Seminar_date from 
+(select Emp_ID, case when seminar1_date is not null then seminar1_date esle 0 end 1st_dt , 
+case when seminar1_date is null and seminar2_date is not null then 1 else 0 end 1st_dt_2,
+case when seminar1_date is null and seminar2_date is null and Seminar3_Date is not null then 1 else 0 end 1st_dt_3 from tbl)  er 
+
+select Emp_ID, 1st_dt_3 as First_Seminar_date from 
+(select Emp_ID, case when seminar1_date is not null then seminar1_date  
+ when seminar1_date is null and seminar2_date is not null then seminar2_date 
+ when seminar1_date is null and seminar2_date is null and Seminar3_Date is not null then Seminar3_Date end 1st_dt_3 from tbl)  er 
+
+
+SELECT 
+    STUDENT_NAME,
+    SUM(CASE WHEN SUBJECT = 'maths' THEN MARKS ELSE 0 END) AS Maths,
+    SUM(CASE WHEN SUBJECT = 'science' THEN MARKS ELSE 0 END) AS Science,
+    SUM(CASE WHEN SUBJECT = 'arts' THEN MARKS ELSE 0 END) AS Arts,
+    SUM(MARKS) AS TOTAL
+FROM your_table_name
+GROUP BY STUDENT_NAME;
+
+
+user_id	date	amount	day_name
+1099	2023-01-01	288	Sunday
+1047	2023-01-04	803	Wednesday
+1055	2023-01-07	546	Saturday
+1052	2023-01-13	889	Friday
+1052	2023-01-13	596	Friday
+1095	2023-01-27	424	Friday
+1019	2023-01-27	185	Friday
+1019	2023-02-03	995	Friday
+1023	2023-02-24	259	Friday
+
+SELECT 
+    user_id,
+    AVG(amount) AS avg_amount,
+    DATEPART(WEEK, CAST([date] AS DATE)) AS week_number
+FROM your_table_name
+WHERE day_name = 'Friday'
+GROUP BY user_id, DATEPART(WEEK, CAST([date] AS DATE));
+

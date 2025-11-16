@@ -1,0 +1,72 @@
+ID	NAME			PHONE_NO
+1	Priya,Verma		9845297170
+2	Praveen Shinde	          785429856
+3	Sachin Dubhe	           9925378601
+4	Lavanya Sharma	             9610945
+
+
+ID	FIRST_NAME	LAST_NAME	PHONE_NO
+1	Priya		Verma		9845297170
+2	Praveen		Shinde		0785429856
+3	Sachin		Dubhe		9925378601
+4	Lavanya		Sharma		0009610945
+
+
+select substring(name, 1, charindex(',', name)-1) as Frist_name, 
+substring(name, charindex(',', name)+1, len(name)-charindex(',', name)) as Last_name, 
+
+cast(right('0000000000'+ cast(phone_no as varchar), 10) as int) PHONE_NO from
+
+(select replace(name), ' ', ',') as name, phone_no from tbl) er
+
+
+
+City Gender
+Bng M
+Bng F
+Bng M
+Del M
+Del M
+Hyd M
+Hyd F
+
+
+City malecount femalecount totalcount
+Bng   2 			1 				3
+Delhi 2 			0 				2
+Hyd   1 			1               2
+
+
+
+select City , 
+sum(case when gender='M' then 1 end) as malecount, 
+sum(case when gender='F' then 1 end) as femalecount, 
+sum(case when gender='M' then 1 end)+ sum(case when gender='F' then 1 end) as totalcount 
+from tbl group by city;
+
+StudentName    Marks
+Amit         30,130,20,4
+Sukruta      100,20,30
+Sonali       140,10
+
+
+Student Name   Marks Count
+Amit           4
+Sukruta         3
+Sonali         2
+
+
+
+from pyspark import SparkSession
+
+
+spark = SparkSession.bulid.master('local').getorcreate
+
+csv_path= ""
+
+df = sprak.read.format("csv").option(headre, 'true').load(path=csv_path)
+
+
+df.count()
+
+df.groupby("cl").
