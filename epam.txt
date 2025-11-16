@@ -1,0 +1,33 @@
+CREATE TABLE Students (
+    StudentID INT PRIMARY KEY,
+    StudentName VARCHAR(50)
+);
+
+CREATE TABLE Courses (
+    CourseID INT PRIMARY KEY,
+    CourseName VARCHAR(50)
+);
+
+
+CREATE TABLE Enrollments (
+    EnrollmentID INT PRIMARY KEY,
+    StudentID INT,
+    CourseID INT,
+    CONSTRAINT FK_Student FOREIGN KEY (StudentID) REFERENCES Students(StudentID),
+    CONSTRAINT FK_Course FOREIGN KEY (CourseID) REFERENCES Courses(CourseID)
+);
+
+SELECT 
+    c.CourseID,
+    c.CourseName,
+    COUNT(e.StudentID) AS EnrolledStudentsCount
+FROM 
+    Courses c
+LEFT JOIN 
+    Enrollments e ON c.CourseID = e.CourseID
+LEFT JOIN 
+    Students s ON e.StudentID = s.StudentID
+GROUP BY 
+    c.CourseID, c.CourseName
+ORDER BY 
+    EnrolledStudentsCount DESC;

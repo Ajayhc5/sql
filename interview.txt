@@ -1,0 +1,87 @@
+emp table
+
+empno,ename, job, sal, deptno
+
+dept table
+
+deptno, dname, loc
+
+1. display - epno, ename, salary, dname, avrage salary by deptno?
+
+>>select e.empno, e.ename, avg(e.sal) over(partition by e.deptno) as sal, d.dname from emp e, dep 
+
+
+2. delete duplicate records from table without using minus, rowid and rownum
+
+>> delete from dup_records where (first_name, last_name, email, age) in (select first_name, last_n
+ame, email, age from dup_records group by first_name, last_name, email, age having count(*)>1);
+
+
+3. Hpw to insert the muliple records in oracle & sql server?
+
+>> insert all
+   into tb_nm (c1, c2, c3, c4) values (v1, v2, v3, v4)
+   into tb_nm (c1, c2, c3, c4) values (v1, v2, v3, v4)
+   into tb_nm (c1, c2, c3, c4) values (v1, v2, v3, v4)
+   into tb_nm (c1, c2, c3, c4) values (v1, v2, v3, v4)
+select * from dual;
+
+4. Display the string 'Apple' in vertical?
+
+>>select substr('Apple',level,1) str from dual connect by level<=length('Apple');
+S
+-
+A
+p
+p
+l
+e
+
+>> SELECT SUBSTR ('Apple', ROWNUM, 1) Vertical FROM DBA_OBJECTS WHERE ROWNUM <= LENGTH (TRIM ('Apple'));
+
+V
+-
+A
+p
+p
+l
+e
+
+
+>> insert all
+ into tb_nm (c1, c2, c3, c4) values ('v1', 'v2', 'v3', 'v4')
+into tb_nm('v1', 'v2', 'v3', 'v4')
+into tb_nm('v1', 'v2', 'v3', 'v4')
+into tb_nm('v1', 'v2', 'v3', 'v4')
+select * from dual;
+
+
+df = spark.read.format("csv").option("multiline", "true").option("header","true").option("inferSchema",True).load("loaction")
+df.createOrReplaceTempView("name")
+
+%sql
+select * from Flood_warnings1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+delete from emp where c1 in(select c1 from emp group by c1 having count(c1)>1) , c2  in(select c2 from emp group by c2 having count(c2)>1)
+

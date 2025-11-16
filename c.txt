@@ -1,0 +1,11 @@
+emp
+ename, d_date, hiredate
+
+select * from 
+(select *, dense_rank() over(order by work_exp desc) as rn from
+(select e.*, format(hiredate as date, 'yyyy')- cast(format(d_date as date, 'yyyy') as int) as gap_after_education, 
+format(cast(getdate() as date), 'yyyy')-cast(format(hiredate as date, 'yyyy') as int) as work_exp from emp e) er) final_tb 
+where rn =1; 
+
+
+selct ename, salary from(select e.*, dense_rank() over(order by e.salary desc) as rn from emp e) as emp_tbl where rn<=2;

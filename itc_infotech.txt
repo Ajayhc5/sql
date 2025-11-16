@@ -1,0 +1,47 @@
+14. GET THE SUM OF POSITIVE AND NEGATIVE VALUES FROM THE BELOW TABLE
+
+INPUT     				OUTPUT
+
+COL1        			SUM_OF_POSITIVE     SUM_OF_NEGATIVE
+
+100         			600                 900
+
+200
+
+-400
+
+NULL
+
+-500
+
+300
+ 
+
+select sum(case when COL1 >0 then COL1  end) SUM_OF_POSITIVE, sum(case when COL1 <0 then COL1 end) SUM_OF_NEGATIV from INPUT     
+
+
+select * from(select e.*, dense_rank() over(partition by e.deptno order by e.sal asc) rn from emp e) er where rn=3
+
+
+Tran_id		customer_id(fk)	Tran_date	tran_type	Amount
+101		A		12-10-2023	C		450
+102		B		13-10-2023	D		5000
+103		A		14-10-2023	D		4590
+104		A		16-10-2023	C		4050
+105		C		18-10-2023	C		100
+106		B		23-10-2023	D		5
+ 
+Customers
+Customer_id(pk)	customer_name	Age	Gender
+A		Steven		45	M
+B		Valli		34	F
+C		Neena		27	F
+D		Lex		33	F
+ 
+write a query to get "Number of male customer and number of female" customer who are all doing transaction
+
+select (customer_id) , count(customer_id) over(partition by gender, customer_id) total_amt from
+(select a.customer_id, b.Gender from transaction a inner join Customers on a.customer_id=b.customer_id)er
+
+select count(customer_id) customer_id, Gender  from
+(select a.customer_id, b.Gender from transaction a inner join Customers on a.customer_id=b.customer_id)er group by Gender  

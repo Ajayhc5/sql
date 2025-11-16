@@ -1,0 +1,58 @@
+table a 
+id
+1
+2
+3
+null
+
+table b
+id
+1
+2
+3
+
+inner join - 
+>> select * from a e inner join b f on e.id=f.id;
+id   id1
+1     1
+2     2
+3     3
+>> 3 records return
+
+Left out join - 
+>> select * from a e left outer join b f on e.id=f.id;
+id   id1
+1     1
+2     2
+3     3
+null  null
+>> 4 records return 
+
+Right out join - 
+>> select * from a e right outer join b f on e.id=f.id;
+id   id1
+1     1
+2     2
+3     3
+>> 3 records return 
+
+Full out join - 
+>> select * from a e full outer join b f on e.id=f.id;
+id   id1
+1     1
+2     2
+3     3
+null  null
+>> 4 records return 
+
+truncate table a;
+drop table a;
+
+
+select * from table b where id < 0;
+
+
+display ename, sal, deptno , sum of sal by detpno where sal> 65000 for the 81
+
+>> select * from emp where sal >= 2000 and to_char(hiredate, 'yy') = 81;
+>> select ename, sal, deptno, sum(sal) over(partition by deptno) sal_sum, hiredate from emp where sal >= 2000 and to_char(hiredate, 'yy') = 81;

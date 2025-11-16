@@ -1,0 +1,41 @@
+Emp
+====
+Emp ID
+NAme
+Salary
+ 
+Dept
+====
+Emp ID
+DeptID
+DeptName
+ 
+Add
+===
+Emp ID
+Address
+
+
+df = emp_df.join(dept_df, col("Emp ID"), "inner join").join(add_df, col("Emp ID"), "inner join")
+
+win_sepc = Windows.partitonBy(col("DeptID")).orderBy(col("Salary").desc())
+
+flt = df.withColumn("rank", dense_rank() over(win_sepc ) )
+
+
+flt.select("Emp ID", "Address").filter("rank=2").show()
+
+
+Cust
+====
+Cust Id
+CustName
+CustAge
+ 
+Senior_Flag
+
+
+
+
+
+

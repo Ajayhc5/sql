@@ -1,0 +1,25 @@
+insert all 
+into a values ('1')
+into a values ('')
+into a values('2')
+into a values('3')
+into a values ('')
+select * from dual;
+
+insert all 
+into b values ('1')
+into b values ('1')
+into b values ('')
+into b values('3')
+into b values('2')
+into b values ('')
+select * from dual;
+
+create table Student(Name varchar(50),Sub1 number(10), Sub2 number(10), Sub3 number(10));
+insert into Student(Name, Sub1, Sub2, Sub3) values ('Arjun', '80', '60', '90') ('Basu', '60', '', '') 
+('Chandu', '50', '70', '');
+
+to_char(hiredate, 'yyyy')+60
+
+select e.ename, e.empno, e.sal, m.ename mgrname, m.sal mgrsal from emp e, emp m where e.mgr=m.e
+mpno and e.sal>m.sal;

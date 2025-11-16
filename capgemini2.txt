@@ -1,0 +1,20 @@
+select * from main_tbl where ID in(
+select id from tbl where format([date] as date, 'yyyy') >='2023' and format([date] as date, 'yyyy') <'2025');
+
+
+select cl1, cl2, cl3,  count(*) dpl_cnt from tbl where load_cycle_id in(select max(load_clycle_id) as load_clycle_id from tbl) 
+group by cl1, cl2, cl3 having count(*)>1;
+
+
+Product table ->product ID, name,price, purchased date
+
+orders table->order id, prod id, QTY,Orderval
+
+Find products where order qty is >5 or orderval is <100 and price <> 10 and assume products purchased on Apr10-15
+
+
+select a.name from Product a inner join orders b on a.product ID=b.product ID 
+where price<>10 and 
+format(cast(purchased date as date), 'MM-dd')>='04-10' and 
+format(cast(purchased date as date), 'MM-dd')<='04-15' and 
+b.qty>5 or d.orderval<100 

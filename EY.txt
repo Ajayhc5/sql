@@ -1,0 +1,61 @@
+Initial load = 10K
+Incremental load = 10K (Insert = 2500, Updates= 2500, Del=2500, No Changes=2500)
+
+2500
+2500
+2500 - history
+2500
+2500
+
+email
+shami.vali@gmail.com
+shamivulla.123@hotmail.com
+priya.mishra@outlook.com
+Shashi.Ranjan@gmail.com
+
+select substring(email, 1, charindex('.', email)-1) as first_name, 
+substring(email, charindex('.', email)+1), charindex('@', email)-charindex('.', email)-1) as last_name,
+
+
+Values
+-2
+3
+-5
+0
+8
+ 
+Required Result:
+POS_SUM:11
+NEG_SUM : -7
+
+
+
+select sum(case when values>0 then values end) as pos_sum, sum(case when values<0 then values end) as NEG_SUM from tbl
+
+
+1st tbl
+id, name, total_marks
+
+2nd tbl 
+id, name, total_marks
+
+
+3rd tbl
+id, name, total_marks
+
+select top 3 *  from 1st_tbl
+union 
+select top 3 *  from 2st_tbl
+union 
+select top 3 *, '3st_tbl' as std from 3st_tbl
+
+
+select  * from (select e.*, dense_rank() over(order by e.total_marks desc)) rn from 1st_tbl e) er where rn<=3
+union
+select  * from (select e.*, dense_rank() over(order by e.total_marks desc)) rn from 2st_tbl e) er where rn<=3
+union 
+select  * from (select e.*, dense_rank() over(order by e.total_marks desc)) rn from 3st_tbl e) er where rn<=3
+
+
+
+ 

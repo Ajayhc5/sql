@@ -1,0 +1,22 @@
+emp
+doj
+
+
+
+
+select formt(getdate(), 'yyyy')-cast(format(cast(doj as varchar), 'yyyy') as int) work_exp from emp
+
+start	end	dist
+B	H	400
+H	B	400
+M	D	400
+D	M	400
+C	P	400
+P	C	400
+
+select start, end, dist from 
+(select *, row_number() over(order by (select 1)) rn from tbl) er where (rn%2)=1
+
+
+
+
